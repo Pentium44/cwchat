@@ -1,0 +1,63 @@
+body {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	background: #020202;
+	color:#f3f3f3;
+	margin: auto;
+}
+
+.title {
+	padding: 12px;
+	font-size: 34px;
+	text-align: center;
+	font-family: Raleway, Arial, sans-serif;
+}
+
+.desc {
+	padding: 4px;
+	font-size: 24px;
+	text-align: center;
+}
+
+.logout { padding: 5px; }
+
+.logout a {
+	color: #0080ff;
+	text-decoration: none;
+}
+
+.logout a:hover {
+	color: #0099ff;
+	text-decoration: underline;
+}
+
+.login {
+	text-align: center;
+}
+
+.chat_title { 	
+	font-family: Arial, sans-serif; 
+	text-shadow: 0px 0px 5px #ffffff; 
+	font-size: 34px; text-align: center; 
+	padding: 22px; 
+}
+
+.text { font-size: 14px; }
+
+#msgbox { 
+	background: #333333;
+	border: solid 1px #333333; 
+	text-align: center; 
+	padding: 5px; 
+	height: 30px;
+	width: 500px;
+}
+
+#msgs { 
+	background: #333333;
+	padding: 5px; 
+	border: solid 2px #333333;
+	height: 470px; 
+	width: 500px; 
+	overflow:auto; 
+}
