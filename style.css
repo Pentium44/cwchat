@@ -1,9 +1,12 @@
+html { height: 100%; }
+
 body {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	background: #020202;
 	color:#f3f3f3;
 	margin: auto;
+	height: 100%;
 }
 
 .title {
@@ -19,14 +22,14 @@ body {
 	text-align: center;
 }
 
-.logout { padding: 5px; }
+.logout { padding: 5px; text-align: center; }
 
-.logout a {
+a {
 	color: #0080ff;
 	text-decoration: none;
 }
 
-.logout a:hover {
+a:hover {
 	color: #0099ff;
 	text-decoration: underline;
 }
@@ -47,17 +50,22 @@ body {
 #msgbox { 
 	background: #333333;
 	border: solid 1px #333333; 
-	text-align: center; 
 	padding: 5px; 
-	height: 30px;
-	width: 500px;
+	height: 15%;
+	min-height: 15%; 
+	width: 90%;
+	margin: auto;
 }
 
 #msgs { 
 	background: #333333;
 	padding: 5px; 
-	border: solid 2px #333333;
-	height: 470px; 
-	width: 500px; 
-	overflow:auto; 
+	border: solid 1px #333333;
+	height: 65%;
+	min-height:65%; 
+	width: 90%;
+	margin: auto;
+	overflow-y: hidden; 
 }
+
+/*#tr { width: 100%; height: 100%; }*/
