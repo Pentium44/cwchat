@@ -40,6 +40,8 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 	*/		
 	
 } else if (isset($_GET['all'])) {
+	//$content = file_get_contents($server_db);
+	// This is faster
 	$flag = file($server_db);
 	$content = "";
 	foreach ($flag as $value) {
