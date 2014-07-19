@@ -239,13 +239,20 @@ if (isset($_GET['do']) && $_GET['do']=="registerform") {
 		?>
 		</div>
 		<div id="msgbox" onkeyup="keypressed(event);">
-			<textarea name="msg" style="width: 100%;" id="msg"></textarea><br>
-			<button onclick="javascript:wrapBBCode('i');">[I]</button>
-			<button onclick="javascript:wrapBBCode('u');">[U]</button> 
-			<button onclick="javascript:wrapBBCode('b');">[B]</button> 
-			<button onclick="javascript:wrapBBCode('url');">[URL]</button> 
-			<button onclick="javascript:wrapBBCode('img');">[IMG]</button>
-			<button style="width: 100%; margin-right: 0;" onclick="getInput();">Send</button>
+			<table>
+				<tr>
+					<td>
+						<textarea name="msg" style="width: 406px;" id="msg"></textarea>
+					</td>
+					<td>
+						<button onclick="javascript:wrapBBCode('i');"><img alt="Italic" src="img/italic.png"></button>
+						<button onclick="javascript:wrapBBCode('u');"><img alt="Underline" src="img/underline.png"></button> 
+						<button onclick="javascript:wrapBBCode('b');"><img alt="Bold" src="img/bold.png"></button> 
+						<button onclick="javascript:wrapBBCode('url');"><img alt="URL" src="img/link.png"></button><br>
+						<button style="width: 172px;" onclick="getInput();">Send</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<script type="text/javascript">
 			doLogin();

@@ -15,8 +15,7 @@ function bbcode_format($str) {
                 '/\[i\](.*?)\[\/i\]/is',  
                 '/\[u\](.*?)\[\/u\]/is',  
                 '/\[url\=(.*?)\](.*?)\[\/url\]/is',  
-                '/\[url\](.*?)\[\/url\]/is',  
-                '/\[img\](.*?)\[\/img\]/is',   
+                '/\[url\](.*?)\[\/url\]/is',   
                 '/\[font\=(.*?)\](.*?)\[\/font\]/is',   
                 '/\[color\=(.*?)\](.*?)\[\/color\]/is',  
                 );  
@@ -27,7 +26,6 @@ function bbcode_format($str) {
                 '<u>$1</u>',  
                 '<a onclick="doLogout();" href="$1" rel="nofollow" title="$2 - $1">$2</a>',  
                 '<a onclick="doLogout();" href="$1" rel="nofollow" title="$1">$1</a>',  
-                '<a onclick="doLogout();" href="$1"><img style="margin: auto; max-width: 515px;" src="$1" alt="$1" /></a>',  
                 '<span style="font-family: $1;">$2</span>',    
                 '<span style="color: $1;">$2</span>', 
                 );  

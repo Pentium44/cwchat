@@ -24,20 +24,7 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 	}
 		
 	file_put_contents($server_db, $old_content.$line);
-	echo $line;
-		
-	/*} else if(isset($_GET['ping'])) {
-		$nick = $_GET['nick'];
-		file_put_contents($pingfile, "$nick" . "-ping");
-	
-	} else if (isset($_GET['pong'])) {
-		$nick = $_GET['nick'];
-		$pings = file_get_contents($pingfile);
-		if(stristr($pings, "$nick-ping")) {
-			$replace = str_replace("$nick-ping", "", $pings);
-			file_put_contents($pingfile, $replace);
-		}
-	*/		
+	echo $line;	
 	
 } else if (isset($_GET['all'])) {
 	//$content = file_get_contents($server_db);
@@ -62,6 +49,8 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 			$old_content = implode("\n", array_slice(explode("\n", $old_content), 1));
 		}
 		
+		/*file_put_contents("db/ping.txt","$nick ".time()."\n");*/
+		
 		file_put_contents($server_db, $old_content.$line);
 		echo $line;
 	
@@ -80,5 +69,10 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 		file_put_contents($server_db, $old_content.$line);
 		echo $line;
 	}
-}
+} /*else if(isset($_GET['ping'])) {
+	$username = $_GET['nick'];
+	
+} else if(isset($_GET['pong'])) {
+	
+}*/
 ?>	
