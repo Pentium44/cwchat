@@ -1,0 +1,44 @@
+#!/bin/bash
+# Backend to send text from web chat into IRC server
+
+. webirc.conf
+#echo "Starting session: $(date "+[%y:%m:%d %T]")" > $log
+echo "NICK $nick" > $input 
+echo "USER $nick 1 * : $user" >> $input
+echo "JOIN $channel" >> $input
+
+tail -f $input | telnet $server $port | while read res
+do
+  # log the session
+  # echo "$(date "+[%y:%m:%d %T]")$res" >> $log
+  # do things when you see output
+  case "$res" in
+    # respond to ping requests from the server
+    PING*)
+      # Reply with pong <3
+      echo "$res" | sed "s/I/O/" >> $input 
+    ;;
+
+    # for pings on nick/user
+    *"You have not"*)
+      echo "JOIN $channel" >> $input
+    ;;
+    # run when someone joins
+    *JOIN*) who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
+      if [ "$who" = "$nick" ]
+      then
+       continue
+      fi
+      echo "<b>$who</b> joined $channel<br />" >> $log
+    ;;
+    # run when a message is seen
+    *PRIVMSG*) 
+      who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
+      msg=$(echo "$res" | perl -pe "s/:.*\!.*@.*\ PRIVMSG\ .*\ \:(.*)/\1/")
+      echo "<b>$who</b>: $msg <br />" >> $log
+    ;;
+    *)
+      continue
+    ;;
+  esac
+done

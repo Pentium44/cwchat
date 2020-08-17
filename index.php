@@ -17,21 +17,6 @@ function loginForm(){
 		<a href="<?php echo $_SERVER['PHP_SELF']; ?>?do=registerform">Register</a>
 		<form action="<?php echo $_SERVER['PHP_SELF']; ?>?do=login" method="post">
 			Username: <input style="padding: 2px;" class="text" type="text" name="username"><br>
-			Password: <input style="padding: 2px;" class="text" type="password" name="password"><br>
-			<input style="padding: 2px;" class="text" type="submit" name="submitBtn" value="Login">
-		</form>
-	</div>
-<?php
-}
-
-function registerForm(){
-?>
-	<br>
-	<div class="login">
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>?do=register" method="post">
-			Username: <input style="padding: 2px;" class="text" type="text" name="username"><br>
-			Password: <input style="padding: 2px;" class="text" type="password" name="password"><br>
-			Password Again: <input style="padding: 2px;" class="text" type="password" name="password-again"><br>
 			<input style="padding: 2px;" class="text" type="submit" name="submitBtn" value="Login">
 		</form>
 	</div>
@@ -41,48 +26,11 @@ function registerForm(){
 //Logout
 if (isset($_GET['do']) && $_GET['do']=="logout") {
 	$_SESSION['cwchat-user'] = null;
-	$_SESSION['cwchat-pass'] = null;
 }
 
-if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn'])) {
-	if($_POST['username']!="" && $_POST['password']!="" && $_POST['password-again']!="") {
-		if($_POST['password']==$_POST['password-again']) {
-			if(!preg_match('/[^a-z0-9]/i', $_POST['username'])) {
-				if(!file_exists("users/" . $_POST['username'] . ".php")) {
-					$colors = array("0000ff", "9900cc", "0080ff", "008000", "ededed");
-					file_put_contents("users/" . $_POST['username'] . ".php", "<?php\n \$user_password = \"" . sha1(md5($_POST['password'])) . "\";\n \$user_color = \"" . $colors[array_rand($colors)] . "\"; \n?>");
-					header("Location: index.php");
-				} else {
-					header("Location: index.php?notify=6");
-				}
-			} else {
-				header("Location: index.php?notify=5");
-			}
-		} else {
-			header("Location: index.php?notify=4");
-		}
-	} else {
-		header("Location: index.php?notify=3");
-	}
-} else if (isset($_GET['do']) && $_GET['do']=="login" && isset($_POST['submitBtn'])){
-    $username = $_POST['username'];
-    if(file_exists("users/$username.php")) {
-		include_once("users/$username.php");
-		if($user_password==sha1(md5($_POST['password']))) {
-			$pass = $user_password;
-			$user = $username;
-			$color = $user_color;
-			$_SESSION['cwchat-user'] = $user;
-			$_SESSION['cwchat-pass'] = $pass;
-			$_SESSION['cwchat-color'] = $color;
-		} else {
-			header("Location: index.php?notify=2");
-		}
-		$name = isset($_POST['username']) ? $_POST['username'] : "Unnamed";
-		$_SESSION['cwchat-user'] = $name;
-	} else {
-		header("Location: index.php?notify=1");
-	}
+if (isset($_GET['do']) && $_GET['do']=="login" && isset($_POST['submitBtn'])){
+	$name = isset($_POST['username']) ? htmlentities(stripslashes($_POST['username'])) : "Unnamed";
+	$_SESSION['cwchat-user'] = $name;
 }
  
 ?>
@@ -98,7 +46,6 @@ if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn']))
 		var link = "";
 		var timerID = 0;
 		var nickName = "<?php echo $_SESSION['cwchat-user']; ?>";
-		var userColor = "<?php echo $_SESSION['cwchat-color'];; ?>";
 
 		// Get the HTTP Object
 		function getHTTPObject() {
@@ -134,7 +81,7 @@ if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn']))
 		function serverWrite() {    
 			ajaxVar = getHTTPObject();
 			if (ajaxVar != null) {
-				link = "server.php?nick="+nickName+"&msg="+document.getElementById('msg').value+"&color="+userColor; 
+				link = "server.php?nick="+nickName+"&msg="+document.getElementById('msg').value; 
 				ajaxVar.open("GET", link , true);
 				ajaxVar.onreadystatechange = setHtml;
 				ajaxVar.send(null);
@@ -178,7 +125,7 @@ if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn']))
 		function doLogin() {
 			ajaxVar = getHTTPObject();
 			if(ajaxVar != null) {
-				link = "server.php?do=login&nick="+nickName+"&color="+userColor;
+				link = "server.php?do=login&nick="+nickName;
 				ajaxVar.open("GET", link, true);
 				ajaxVar.onreadystatechange = setHtml;
 				ajaxVar.send(null);
@@ -188,7 +135,7 @@ if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn']))
 		function doLogout() {
 			ajaxVar = getHTTPObject();
 			if(ajaxVar != null) {
-				link = "server.php?do=logout&nick="+nickName+"&color="+userColor;
+				link = "server.php?do=logout&nick="+nickName;
 				ajaxVar.open("GET", link, true);
 				ajaxVar.onreadystatechange = setHtml;
 				ajaxVar.send(null);
@@ -214,20 +161,9 @@ if (isset($_GET['do']) && $_GET['do']=="register" && isset($_POST['submitBtn']))
      <div class="title"><?php echo $title; ?></div>
 		<div class="desc"><?php echo $desc; ?></div>
 <?php 
-if (isset($_GET['do']) && $_GET['do']=="registerform") {
-	registerForm();
-} else if(isset($_GET['notify'])) {
-	if($_GET['notify']=="1") { echo "Error: User not found"; }
-	else if($_GET['notify']=="2") { echo "Error: Incorrect password provided"; }
-	else if($_GET['notify']=="3") { echo "Error: Please fill out all the text boxes"; }
-	else if($_GET['notify']=="4") { echo "Error: The provided passwords did not match"; }
-	else if($_GET['notify']=="5") { echo "Error: Special characters cannot be used in your username"; }
-	else if($_GET['notify']=="6") { echo "Error: This username is already in use"; }
-} else if (!isset($_SESSION['cwchat-user']) || !isset($_SESSION['cwchat-pass'])){ 
+if (!isset($_SESSION['cwchat-user'])){ 
     loginForm();
 } else { 
-      $name = isset($_SESSION['cwchat-user']) ? $_SESSION['cwchat-user'] : "Unnamed";
-      $_SESSION['cwchat-user'] = $name;
     ?>
 	<div class="logout"><a onclick="doLogout();" href="index.php?do=logout">Logout</a></div>
 		<div id="msgs">
