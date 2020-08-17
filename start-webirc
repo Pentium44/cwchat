@@ -1,6 +1,20 @@
 #!/bin/bash
 # Start webIRC
 
+if [ ! -f ".webirc.log" ]; then
+	touch .webirc.log
+	chmod 777 .webirc.log
+else
+	chmod 777 .webirc.log
+fi
+
+if [ ! -f ".webirc.input" ]; then
+        touch .webirc.input
+        chmod 777 .webirc.input
+else
+	chmod 777 .webirc.input
+fi
+
 case $1 in
 	start ) ./webirc-server > /dev/null & ;;
 	* ) echo "Usage: start-webirc [start]";;

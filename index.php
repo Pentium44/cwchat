@@ -29,10 +29,12 @@ if (isset($_GET['do']) && $_GET['do']=="logout") {
 }
 
 if (isset($_GET['do']) && $_GET['do']=="login" && isset($_POST['submitBtn'])){
-	$name = isset($_POST['username']) ? htmlentities(stripslashes($_POST['username'])) : "Unnamed";
+	$name = isset($_POST['username']) && ($_POST['username'] !== "") ? htmlentities(stripslashes($_POST['username'])) : "Unnamed";
 	$_SESSION['cwchat-user'] = $name;
 }
- 
+
+//if(!isset($_SESSION['cwchat-user'])) { header("Location: ?do=login"); }
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
@@ -181,10 +183,6 @@ if (!isset($_SESSION['cwchat-user'])){
 						<textarea name="msg" style="width: 406px;" id="msg"></textarea>
 					</td>
 					<td>
-						<button onclick="javascript:wrapBBCode('i');"><img alt="Italic" src="img/italic.png"></button>
-						<button onclick="javascript:wrapBBCode('u');"><img alt="Underline" src="img/underline.png"></button> 
-						<button onclick="javascript:wrapBBCode('b');"><img alt="Bold" src="img/bold.png"></button> 
-						<button onclick="javascript:wrapBBCode('url');"><img alt="URL" src="img/link.png"></button><br>
 						<button style="width: 172px;" onclick="getInput();">Send</button>
 					</td>
 				</tr>

@@ -7,14 +7,14 @@
 ///////
 
 include_once("config.php");
-include("bbcode.php");
+//include("bbcode.php");
 
 if (isset($_GET['msg']) && $_GET['msg']!=""){
 		
 	$nick = isset($_GET['nick']) ? $_GET['nick'] : "Hidden";
-	$msg  = bbcode_format(htmlentities(stripcslashes($_GET['msg'])));
+	$msg  = htmlentities(stripcslashes($_GET['msg']));
 	$line = "PRIVMSG $channel :[WEB]$nick: $msg\n";
-	$brline = "<b>$nick</b>: $msg<br />\n";
+	$brline = "$nick: $msg\n";
 	$old_content = file_get_contents($irc_input);
 		
 	$lines = count(file($irc_input));
@@ -43,7 +43,7 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 	foreach ($flag as $value) {
 		$content .= $value;
 	}
-	echo $content;
+	echo nl2br(htmlentities(stripslashes($content)));
 	
 } else if (isset($_GET['do'])) {
 	if($_GET['do']=="login") {

@@ -12,7 +12,6 @@ Requirements:
 Installation:
 	~Download CWChat
 	~Extract it to desired web server / htdocs directory
-	~Chmod .webirc.log and .webirc.input to 777
 	~Customize config.php / webirc.conf to your likings
 	~Use it!
 	

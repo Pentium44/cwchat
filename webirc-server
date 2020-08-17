@@ -29,13 +29,13 @@ do
       then
        continue
       fi
-      echo "<b>$who</b> joined $channel<br />" >> $log
+      echo "$who joined $channel" >> $log
     ;;
     # run when a message is seen
     *PRIVMSG*) 
       who=$(echo "$res" | perl -pe "s/:(.*)\!.*@.*/\1/")
       msg=$(echo "$res" | perl -pe "s/:.*\!.*@.*\ PRIVMSG\ .*\ \:(.*)/\1/")
-      echo "<b>$who</b>: $msg <br />" >> $log
+      echo "$who: $msg" >> $log
     ;;
     *)
       continue

@@ -9,7 +9,7 @@
 $title = "CWChat"; // Chat title
 $desc = "Chris' Website IRC Chat"; // Chat description
 $server_bot = "Server"; // Servers bot nickname
-$server_msgcount = "52"; // Number of messages to leave at the end of the server database
+$server_msgcount = "265"; // Number of messages to leave at the end of the server database
 $channel = "#theroot"; // IRC channel
 
 ///// NO TOUCHY /////
