@@ -14,7 +14,6 @@ function loginForm(){
 ?>
 	<br>
 	<div class="login">
-		<a href="<?php echo $_SERVER['PHP_SELF']; ?>?do=registerform">Register</a>
 		<form action="<?php echo $_SERVER['PHP_SELF']; ?>?do=login" method="post">
 			Username: <input style="padding: 2px;" class="text" type="text" name="username"><br>
 			<input style="padding: 2px;" class="text" type="submit" name="submitBtn" value="Login">
@@ -160,8 +159,7 @@ if (isset($_GET['do']) && $_GET['do']=="login" && isset($_POST['submitBtn'])){
     </script>   
 </head>
 <body onload="UpdateTimer();">
-     <div class="title"><?php echo $title; ?></div>
-		<div class="desc"><?php echo $desc; ?></div>
+     <div class="info"><?php echo "CWChat " . $version . " ~ Connected to: " . $server . ":" . $port . " on " . $channel; ?></div>
 <?php 
 if (!isset($_SESSION['cwchat-user'])){ 
     loginForm();
@@ -180,10 +178,10 @@ if (!isset($_SESSION['cwchat-user'])){
 			<table>
 				<tr>
 					<td>
-						<textarea name="msg" style="width: 406px;" id="msg"></textarea>
+						<textarea name="msg" style="width: 600px; height: 22px;" id="msg"></textarea>
 					</td>
 					<td>
-						<button style="width: 172px;" onclick="getInput();">Send</button>
+						<button style="width: 80px;" onclick="getInput();">Send</button>
 					</td>
 				</tr>
 			</table>

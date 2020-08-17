@@ -16,13 +16,7 @@ if (isset($_GET['msg']) && $_GET['msg']!=""){
 	$line = "PRIVMSG $channel :[WEB]$nick: $msg\n";
 	$brline = "$nick: $msg\n";
 	$old_content = file_get_contents($irc_input);
-		
 	$lines = count(file($irc_input));
-	
-	if($lines>$server_msgcount) {
-		$old_content = implode("\n", array_slice(explode("\n", $old_content), 1));
-	}
-
 	file_put_contents($irc_input, $old_content.$line);
 
 	$old_br_content = file_get_contents($server_db);

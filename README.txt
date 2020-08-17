@@ -14,6 +14,11 @@ Installation:
 	~Extract it to desired web server / htdocs directory
 	~Customize config.php / webirc.conf to your likings
 	~Use it!
+
+Changelog:
+	v1.0.0: 
+		-Probably going to do something with it!
+		-Functioning as a bash / php based IRC web client!
 	
 Legal stuff:
 	CWChat is based from microchat and has been greatly modified for speed, 
