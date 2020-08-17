@@ -1,8 +1,0 @@
-NICK WebIRC
-USER WebIRC 1 * : WebIRCClient
-JOIN #theroot
-PRIVMSG #theroot :[WEB]Chraaas: Working as it should be
-PRIVMSG #theroot :[WEB]Chraaas left #theroot<br>
-PRIVMSG #theroot :[WEB]Pentium44 joined #theroot
-PRIVMSG #theroot :[WEB]Pentium44: Okay, that should've been fixed!
-PRIVMSG #theroot :[WEB]Pentium44 left #theroot
